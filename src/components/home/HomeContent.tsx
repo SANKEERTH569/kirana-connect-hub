@@ -13,12 +13,10 @@ const UnregisteredContent: React.FC = () => {
 
   // Use both refs
   const setRefs = (el: HTMLDivElement | null) => {
-    if (el) {
-      // Save to the ref object
-      ref.current = el;
-      // Pass to the intersection observer
-      setRef(el);
-    }
+    // Save to the ref object
+    ref.current = el;
+    // Pass to the intersection observer
+    setRef(el);
   };
 
   const staggerDelays = useStaggeredAnimation(3, 100, 100);
@@ -60,12 +58,10 @@ const RegisteredContent: React.FC = () => {
   
   // Use both refs
   const setRefs = (el: HTMLDivElement | null) => {
-    if (el) {
-      // Save to the ref object
-      ref.current = el;
-      // Pass to the intersection observer
-      setRef(el);
-    }
+    // Save to the ref object
+    ref.current = el;
+    // Pass to the intersection observer
+    setRef(el);
   };
   
   const staggerDelays = useStaggeredAnimation(4, 100, 100);

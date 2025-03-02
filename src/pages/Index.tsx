@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '@/components/layout/Header';
 import Navigation from '@/components/layout/Navigation';
 import PhoneAuth from '@/components/authentication/PhoneAuth';
@@ -14,13 +14,19 @@ const Index = () => {
   const hotelId = "HTL1234";
   
   const handleSuccessfulAuth = () => {
+    console.log("Authentication successful, setting isAuthenticated to true");
     setIsAuthenticated(true);
     
     // For demo purposes, set registered status after 2 seconds
     setTimeout(() => {
+      console.log("Setting isRegistered to true after timeout");
       setIsRegistered(true);
     }, 2000);
   };
+
+  useEffect(() => {
+    console.log("Current state - isAuthenticated:", isAuthenticated, "isRegistered:", isRegistered);
+  }, [isAuthenticated, isRegistered]);
 
   if (isPageLoading) {
     return (
