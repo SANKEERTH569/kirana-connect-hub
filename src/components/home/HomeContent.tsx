@@ -9,7 +9,7 @@ interface HomeContentProps {
 
 const UnregisteredContent: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isVisible = useElementOnScreen(ref);
+  const [, isVisible] = useElementOnScreen({ threshold: 0.1 });
   const staggerDelays = useStaggeredAnimation(3, 100, 100);
 
   return (
@@ -45,7 +45,7 @@ const UnregisteredContent: React.FC = () => {
 
 const RegisteredContent: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isVisible = useElementOnScreen(ref);
+  const [, isVisible] = useElementOnScreen({ threshold: 0.1 });
   const staggerDelays = useStaggeredAnimation(4, 100, 100);
 
   const demoGroceryItems = [
