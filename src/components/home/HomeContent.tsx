@@ -23,7 +23,7 @@ const UnregisteredContent: React.FC = () => {
 
   return (
     <div ref={setRefs} className="flex flex-col items-center justify-center py-8">
-      <div className={`glass-panel w-full max-w-md mx-auto text-center mb-6 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: `${staggerDelays[0]}ms` }}>
+      <div className={`glass-panel w-full max-w-md mx-auto text-center mb-6 ${isVisible ? 'animate-fade-in' : ''}`} style={{ animationDelay: `${staggerDelays[0]}ms` }}>
         <StatusChip status="pending" className="mb-4" />
         <h2 className="text-xl font-semibold mb-3">Registration Pending</h2>
         <p className="text-muted-foreground text-sm">
@@ -31,7 +31,7 @@ const UnregisteredContent: React.FC = () => {
         </p>
       </div>
       
-      <div className={`glass-panel w-full max-w-md mx-auto ${isVisible ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: `${staggerDelays[1]}ms` }}>
+      <div className={`glass-panel w-full max-w-md mx-auto ${isVisible ? 'animate-fade-in' : ''}`} style={{ animationDelay: `${staggerDelays[1]}ms` }}>
         <h3 className="text-lg font-medium mb-3">What to expect?</h3>
         <ul className="space-y-3 text-sm">
           <li className="flex items-start">
@@ -75,7 +75,7 @@ const RegisteredContent: React.FC = () => {
 
   return (
     <div ref={setRefs} className="flex flex-col items-center justify-center py-8">
-      <div className={`glass-panel w-full max-w-md mx-auto mb-6 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: `${staggerDelays[0]}ms` }}>
+      <div className={`glass-panel w-full max-w-md mx-auto mb-6 ${isVisible ? 'animate-fade-in' : ''}`} style={{ animationDelay: `${staggerDelays[0]}ms` }}>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold">Your Grocery List</h2>
           <StatusChip status="approved" />
@@ -84,7 +84,7 @@ const RegisteredContent: React.FC = () => {
           {demoGroceryItems.map((item, index) => (
             <div 
               key={item.id} 
-              className={`flex items-center justify-between p-3 rounded-lg bg-white border border-border ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}
+              className={`flex items-center justify-between p-3 rounded-lg bg-white border border-border ${isVisible ? 'animate-fade-in' : ''}`}
               style={{ animationDelay: `${staggerDelays[index+1]}ms` }}
             >
               <div>

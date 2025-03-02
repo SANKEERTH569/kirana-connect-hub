@@ -28,6 +28,14 @@ const Index = () => {
     console.log("Current state - isAuthenticated:", isAuthenticated, "isRegistered:", isRegistered);
   }, [isAuthenticated, isRegistered]);
 
+  // For development purposes - comment out if you want to use the authentication flow
+  useEffect(() => {
+    // Force authenticated state to see content
+    setIsAuthenticated(true);
+    // Optionally also set registered to see that content
+    // setIsRegistered(true);
+  }, []);
+
   if (isPageLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -37,50 +45,44 @@ const Index = () => {
   }
 
   return (
-    <PageTransition>
-      <div className="min-h-screen max-w-lg mx-auto px-4 py-6 flex flex-col">
-        {isAuthenticated ? (
-          <>
-            <Header hotelId={hotelId} />
-            <div className="flex-1 mt-6">
-              <HomeContent isRegistered={isRegistered} />
-            </div>
-            <div className="mt-auto py-4">
-              <Navigation className="max-w-xs mx-auto" />
-            </div>
-          </>
-        ) : (
-          <div className="flex flex-col items-center justify-center flex-1">
-            <PageTransition type="scale" className="mb-8">
-              <div className="text-center">
-                <div className="flex justify-center mb-6">
-                  <div className="relative">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-kirana-purple to-kirana-light-purple opacity-20 blur-xl"></div>
-                    <div className="relative">
-                      <div className="rounded-full bg-white p-4 shadow-soft">
-                        <div className="bg-gradient-to-br from-primary to-kirana-purple rounded-full h-20 w-20 flex items-center justify-center">
-                          <span className="text-white font-bold text-4xl">K</span>
-                        </div>
-                      </div>
+    <div className="min-h-screen max-w-lg mx-auto px-4 py-6 flex flex-col">
+      {isAuthenticated ? (
+        <>
+          <Header hotelId={hotelId} />
+          <div className="flex-1 mt-6">
+            <HomeContent isRegistered={isRegistered} />
+          </div>
+          <div className="mt-auto py-4">
+            <Navigation className="max-w-xs mx-auto" />
+          </div>
+        </>
+      ) : (
+        <div className="flex flex-col items-center justify-center flex-1">
+          <div className="text-center">
+            <div className="flex justify-center mb-6">
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-kirana-purple to-kirana-light-purple opacity-20 blur-xl"></div>
+                <div className="relative">
+                  <div className="rounded-full bg-white p-4 shadow-soft">
+                    <div className="bg-gradient-to-br from-primary to-kirana-purple rounded-full h-20 w-20 flex items-center justify-center">
+                      <span className="text-white font-bold text-4xl">K</span>
                     </div>
                   </div>
                 </div>
-                <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-kirana-purple bg-clip-text text-transparent">
-                  My Kirana
-                </h1>
-                <p className="text-muted-foreground mb-8">
-                  Simplifying daily grocery deliveries
-                </p>
               </div>
-            </PageTransition>
-            
-            <PageTransition type="fade" delay={300}>
-              <PhoneAuth onSuccess={handleSuccessfulAuth} />
-            </PageTransition>
+            </div>
+            <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-kirana-purple bg-clip-text text-transparent">
+              My Kirana
+            </h1>
+            <p className="text-muted-foreground mb-8">
+              Simplifying daily grocery deliveries
+            </p>
           </div>
-        )}
-      </div>
-    </PageTransition>
+          
+          <PhoneAuth onSuccess={handleSuccessfulAuth} />
+        </div>
+      )}
+    </div>
   );
 };
 
