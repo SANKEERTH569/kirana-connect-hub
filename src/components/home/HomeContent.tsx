@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { useElementOnScreen, useStaggeredAnimation } from '@/utils/animation';
 import StatusChip from '../common/StatusChip';
 
@@ -8,11 +8,12 @@ interface HomeContentProps {
 }
 
 const UnregisteredContent: React.FC = () => {
-  const [ref, isVisible] = useElementOnScreen();
+  const ref = useRef<HTMLDivElement>(null);
+  const isVisible = useElementOnScreen(ref);
   const staggerDelays = useStaggeredAnimation(3, 100, 100);
 
   return (
-    <div ref={ref as React.RefObject<HTMLDivElement>} className="flex flex-col items-center justify-center py-8">
+    <div ref={ref} className="flex flex-col items-center justify-center py-8">
       <div className={`glass-panel w-full max-w-md mx-auto text-center mb-6 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: `${staggerDelays[0]}ms` }}>
         <StatusChip status="pending" className="mb-4" />
         <h2 className="text-xl font-semibold mb-3">Registration Pending</h2>
@@ -43,7 +44,8 @@ const UnregisteredContent: React.FC = () => {
 };
 
 const RegisteredContent: React.FC = () => {
-  const [ref, isVisible] = useElementOnScreen();
+  const ref = useRef<HTMLDivElement>(null);
+  const isVisible = useElementOnScreen(ref);
   const staggerDelays = useStaggeredAnimation(4, 100, 100);
 
   const demoGroceryItems = [
@@ -54,7 +56,7 @@ const RegisteredContent: React.FC = () => {
   ];
 
   return (
-    <div ref={ref as React.RefObject<HTMLDivElement>} className="flex flex-col items-center justify-center py-8">
+    <div ref={ref} className="flex flex-col items-center justify-center py-8">
       <div className={`glass-panel w-full max-w-md mx-auto mb-6 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: `${staggerDelays[0]}ms` }}>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold">Your Grocery List</h2>
