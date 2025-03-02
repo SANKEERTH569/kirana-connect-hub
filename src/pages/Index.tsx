@@ -1,13 +1,80 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState } from 'react';
+import Header from '@/components/layout/Header';
+import Navigation from '@/components/layout/Navigation';
+import PhoneAuth from '@/components/authentication/PhoneAuth';
+import HomeContent from '@/components/home/HomeContent';
+import PageTransition from '@/components/common/PageTransition';
+import { usePageTransition } from '@/utils/animation';
 
 const Index = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const isPageLoading = usePageTransition();
+  const hotelId = "HTL1234";
+  
+  const handleSuccessfulAuth = () => {
+    setIsAuthenticated(true);
+    
+    // For demo purposes, set registered status after 2 seconds
+    setTimeout(() => {
+      setIsRegistered(true);
+    }, 2000);
+  };
+
+  if (isPageLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin-slow h-12 w-12 rounded-full border-t-2 border-b-2 border-primary"></div>
       </div>
-    </div>
+    );
+  }
+
+  return (
+    <PageTransition>
+      <div className="min-h-screen max-w-lg mx-auto px-4 py-6 flex flex-col">
+        {isAuthenticated ? (
+          <>
+            <Header hotelId={hotelId} />
+            <div className="flex-1 mt-6">
+              <HomeContent isRegistered={isRegistered} />
+            </div>
+            <div className="mt-auto py-4">
+              <Navigation className="max-w-xs mx-auto" />
+            </div>
+          </>
+        ) : (
+          <div className="flex flex-col items-center justify-center flex-1">
+            <PageTransition type="scale" className="mb-8">
+              <div className="text-center">
+                <div className="flex justify-center mb-6">
+                  <div className="relative">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-kirana-purple to-kirana-light-purple opacity-20 blur-xl"></div>
+                    <div className="relative">
+                      <div className="rounded-full bg-white p-4 shadow-soft">
+                        <div className="bg-gradient-to-br from-primary to-kirana-purple rounded-full h-20 w-20 flex items-center justify-center">
+                          <span className="text-white font-bold text-4xl">K</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-kirana-purple bg-clip-text text-transparent">
+                  My Kirana
+                </h1>
+                <p className="text-muted-foreground mb-8">
+                  Simplifying daily grocery deliveries
+                </p>
+              </div>
+            </PageTransition>
+            
+            <PageTransition type="fade" delay={300}>
+              <PhoneAuth onSuccess={handleSuccessfulAuth} />
+            </PageTransition>
+          </div>
+        )}
+      </div>
+    </PageTransition>
   );
 };
 
