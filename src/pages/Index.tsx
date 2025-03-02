@@ -28,12 +28,10 @@ const Index = () => {
     console.log("Current state - isAuthenticated:", isAuthenticated, "isRegistered:", isRegistered);
   }, [isAuthenticated, isRegistered]);
 
-  // For development purposes - comment out if you want to use the authentication flow
+  // For development purposes - auto authenticate to see content
   useEffect(() => {
-    // Force authenticated state to see content
     setIsAuthenticated(true);
-    // Optionally also set registered to see that content
-    // setIsRegistered(true);
+    setIsRegistered(true);
   }, []);
 
   if (isPageLoading) {
